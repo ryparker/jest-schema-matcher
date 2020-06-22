@@ -5,7 +5,8 @@
   "files": [
     "dist/"
   ],
-  "main": "./dist",
+  "main": "dist/index",
+  "types": "dist/index.d.ts",
   "repository": "https://ryparker@github.com/ryparker/jest-schema-matcher.git",
   "author": "Ryan Parker",
   "scripts": {
@@ -25,20 +26,26 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",
-    "@types/lodash": "^4.14.156",
     "@types/node": "^14.0.13",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "^3.2.0",
+    "eslint-plugin-jest": "^23.16.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.0.1",
     "nyc": "^15.1.0",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "semantic-release": "^17.0.8",
+    "ts-jest": "^26.1.1",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.5",
     "xo": "^0.32.0"
   },
   "xo": {
+    "extends": [
+      "plugin:jest/recommended"
+    ],
+    "prettier": true,
     "rules": {
       "@typescript-eslint/restrict-plus-operands": 0,
       "@typescript-eslint/restrict-template-expressions": 0,
