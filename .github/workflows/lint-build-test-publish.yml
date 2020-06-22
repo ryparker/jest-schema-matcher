@@ -19,7 +19,7 @@ jobs:
       - name: Lint
         run: yarn lint
       # - name: Build & Test
-        # run: yarn test
+      #   run: yarn test
 
   publish-github-package-repo:
     needs: [pre-release-checks]
