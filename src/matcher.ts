@@ -18,7 +18,7 @@ declare global {
 
 const {SHOULD_UPDATE_SCHEMAS} = global.TEST_DATA;
 
-export async function matcher(response, schemaName) {
+export async function toMatchSchema(response, schemaName) {
 	const {data} = response;
 
 	const failureMessages = [];
@@ -49,18 +49,16 @@ export async function matcher(response, schemaName) {
 
 	const pass = failureMessages.length === 0;
 
-	// Const matcherOptions = {
-	// 	comment: 'Using AJV schema validator.',
-	// 	isNot: this.isNot,
-	// 	promise: this.promise
-	// };
+	const matcherOptions = {
+		comment: 'Using AJV schema validator.',
+		isNot: this.isNot,
+		promise: this.promise
+	};
 
-	// const title =
-	// 	chalk.inverse.bold('JSON schema matcher') +
-	// 	': ' +
-	// 	matcherHint('toMatchSchema', 'received', 'schema', matcherOptions);
-
-	const title = createTitle();
+	const title =
+		chalk.inverse.bold('JSON schema matcher') +
+		': ' +
+		matcherHint('toMatchSchema', 'received', 'schema', matcherOptions);
 
 	failureMessages.unshift(title);
 
@@ -71,20 +69,6 @@ export async function matcher(response, schemaName) {
 		pass,
 		schema
 	};
-}
-
-function createTitle() {
-	const matcherOptions = {
-		comment: 'Using AJV schema validator.',
-		isNot: this.isNot,
-		promise: this.promise
-	};
-
-	return (
-		chalk.inverse.bold('JSON schema matcher') +
-		': ' +
-		matcherHint('toMatchSchema', 'received', 'schema', matcherOptions)
-	);
 }
 
 async function writeSchema(path, schema) {

@@ -1,1 +1,1 @@
-export {matcher} from './matcher';
+export {toMatchSchema} from './matcher';
