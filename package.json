@@ -2,6 +2,9 @@
   "name": "jest-schema-matcher",
   "version": "0.0.2",
   "license": "MIT",
+  "files": [
+    "dist/"
+  ],
   "main": "./dist",
   "repository": "https://ryparker@github.com/ryparker/jest-schema-matcher.git",
   "author": "Ryan Parker",
@@ -18,7 +21,7 @@
     "jest-matcher-utils": "^26.0.1",
     "lodash": "^4.17.15",
     "pretty-format": "^26.0.1",
-    "schematized": "^1.5.0",
+    "schematized": "^1.5.1",
     "variable-diff": "^2.0.1"
   },
   "devDependencies": {
@@ -38,7 +41,9 @@
   },
   "xo": {
     "rules": {
-      "@typescript-eslint/restrict-plus-operands": 0
+      "@typescript-eslint/restrict-plus-operands": 0,
+      "@typescript-eslint/restrict-template-expressions": 0,
+      "no-eval": 0
     }
   },
   "config": {

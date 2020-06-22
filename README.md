@@ -1,4 +1,4 @@
-# jest-schema-matcher
+# Jest-Schema-Matcher
 
 [![npm version](https://badge.fury.io/js/jest-schema-matcher.svg)](https://badge.fury.io/js/jest-schema-matcher)
 ![Lint-Build-Test-Publish](https://github.com/ryparker/jest-schema-matcher/workflows/Lint-Build-Test-Publish/badge.svg)
