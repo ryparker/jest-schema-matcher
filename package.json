@@ -1,6 +1,6 @@
 {
   "name": "jest-schema-matcher",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "license": "MIT",
   "files": [
     "dist/"
@@ -56,5 +56,21 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "keywords": [
+    "jest",
+    "matcher",
+    "json",
+    "schema",
+    "object",
+    "convert",
+    "generate",
+    "types",
+    "type",
+    "produce",
+    "generic",
+    "validation",
+    "data",
+    "datatypes"
+  ]
 }
