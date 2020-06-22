@@ -1,7 +1,6 @@
 {
   "name": "jest-schema-matcher",
-  "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "./dist",
   "repository": "https://ryparker@github.com/ryparker/jest-schema-matcher.git",
