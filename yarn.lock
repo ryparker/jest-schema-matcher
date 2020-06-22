@@ -7968,10 +7968,10 @@ saxes@^5.0.0:
   dependencies:
     xmlchars "^2.2.0"
 
-schematized@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/schematized/-/schematized-1.5.0.tgz#9c51af643a4437d3e3143223ad1576b9a0ad05c1"
-  integrity sha512-mLw2nJFYhBk9zGYOC0+oAmquJFJtd3PC5jGezVL04BRq81QUkkZBeXmHRzioZezjToyvvIspS497ZfBdiiuD2w==
+schematized@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/schematized/-/schematized-1.5.1.tgz#9452abc8d66776a3a1876c04d98874171888f511"
+  integrity sha512-b93Oze9SFvY65zhlI3MRz2OPouGDKpHEbKjX6LZ4yDjPX2aL3hFmxu3Oo7Lx0HvVBNUbRt68UqV9XP5/ol1ozw==
   dependencies:
     lodash "^4.17.15"
 
