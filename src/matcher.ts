@@ -11,7 +11,7 @@ import path from 'path';
 declare global {
 	namespace NodeJS {
 		interface Global {
-			TEST_DATA: {SHOULD_UPDATE_SCHEMAS: boolean};
+			TEST_DATA: Record<string, any>;
 		}
 	}
 }
