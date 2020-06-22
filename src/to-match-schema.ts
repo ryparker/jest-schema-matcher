@@ -8,19 +8,15 @@ import fs from 'fs/promises';
 import {matcherHint} from 'jest-matcher-utils';
 import path from 'path';
 
-declare global {
-	namespace NodeJS {
-		interface Global {
-			TEST_DATA: Record<string, any>;
-		}
-	}
+interface CustomNodeJsGlobal extends NodeJS.Global {
+	TEST_DATA: {SHOULD_UPDATE_SCHEMAS: boolean};
 }
+
+declare const global: CustomNodeJsGlobal;
 
 const {SHOULD_UPDATE_SCHEMAS} = global.TEST_DATA;
 
-export async function toMatchSchema(response, schemaName) {
-	const {data} = response;
-
+export async function toMatchSchema(object, schemaName) {
 	const failureMessages = [];
 
 	const schemaPath = await findSchema(this.testPath, schemaName);
@@ -32,18 +28,18 @@ export async function toMatchSchema(response, schemaName) {
 			schemaName,
 			schemaPath,
 			schema,
-			data
+			object
 		);
 		if (schemaChanges) {
 			failureMessages.unshift(schemaChanges);
 		}
 
-		// Const validationFailures = validateAgainstSchema(schema, data)
+		// Const validationFailures = validateAgainstSchema(schema, object)
 		// if (validationFailures) failureMessages.unshift(validationFailures)
 	}
 
 	if (!schema) {
-		schema = generateSchema(schemaName, data);
+		schema = generateSchema(schemaName, object);
 		await writeSchema(schemaPath, schema);
 	}
 
@@ -118,8 +114,8 @@ async function findSchema(testPath, schemaName) {
 	return schemaPath;
 }
 
-async function checkForSchemaChanges(schemaName, schemaPath, schema, data) {
-	const newSchema = await generateSchema(schemaName, data, schema);
+async function checkForSchemaChanges(schemaName, schemaPath, schema, object) {
+	const newSchema = await generateSchema(schemaName, object, schema);
 
 	const schemaDiff = compareSchemas(schema, newSchema);
 
@@ -151,14 +147,14 @@ function compareSchemas(schemaA, schemaB) {
 	return diff(clonedSchemaA, clonedSchemaB);
 }
 
-function generateSchema(_schemaName, data, schema = {}) {
+function generateSchema(_schemaName, object, schema = {}) {
 	const schemaBuilder = new SchemaBuilder();
 
 	if (schema) {
 		schemaBuilder.addSchema(schema);
 	}
 
-	schemaBuilder.addObject(data);
+	schemaBuilder.addObject(object);
 
 	const newSchema = schemaBuilder.toSchema();
 
@@ -171,26 +167,26 @@ function generateSchema(_schemaName, data, schema = {}) {
 // 	return ajv.compile(schema);
 // }
 
-// Function validateAgainstSchema(schema, data) {
+// Function validateAgainstSchema(schema, object) {
 // 	const validator = createSchemaValidator(schema);
-// 	const valid = validator(data);
+// 	const valid = validator(object);
 
 // 	if (!valid) {
-// 		return shapeValidationMessage(validator, data);
+// 		return shapeValidationMessage(validator, object);
 // 	}
 // }
 
-// function shapeValidationMessage(validator, _data) {
+// function shapeValidationMessage(validator, _object) {
 // 	const {errors} = validator;
 
 // 	return errors.map(error => {
-// 		const rejectedValue = prettyFormat(eval(`_data${error.dataPath}`));
+// 		const rejectedValue = prettyFormat(eval(`_object${error.objectPath}`));
 // 		const allowedValues = error?.params.allowedValues;
 
 // 		return (
 // 			chalk.bold.yellow(`${error.keyword.toUpperCase()}`) +
 // 			' violation:  ' +
-// 			chalk.yellow(`received${error.dataPath} ${error.message}.`) +
+// 			chalk.yellow(`received${error.objectPath} ${error.message}.`) +
 // 			'\n\n' +
 // 			'Rejected value: ' +
 // 			printReceived(rejectedValue) +
