@@ -4,7 +4,7 @@
 import {SchemaBuilder} from 'schematized';
 import chalk from 'chalk';
 import diff from 'variable-diff';
-import fs from 'fs/promises';
+import fs from 'fs';
 import {matcherHint} from 'jest-matcher-utils';
 import path from 'path';
 
@@ -16,15 +16,15 @@ declare const global: CustomNodeJsGlobal;
 
 const {SHOULD_UPDATE_SCHEMAS} = global.TEST_DATA;
 
-export async function toMatchSchema(object, schemaName) {
+export function toMatchSchema(object, schemaName) {
 	const failureMessages = [];
 
-	const schemaPath = await findSchema(this.testPath, schemaName);
+	const schemaPath = findSchema(this.testPath, schemaName);
 
-	let schema = await readSchema(schemaPath);
+	let schema = readSchema(schemaPath);
 
 	if (schema) {
-		const schemaChanges = await checkForSchemaChanges(
+		const schemaChanges = checkForSchemaChanges(
 			schemaName,
 			schemaPath,
 			schema,
@@ -40,7 +40,7 @@ export async function toMatchSchema(object, schemaName) {
 
 	if (!schema) {
 		schema = generateSchema(schemaName, object);
-		await writeSchema(schemaPath, schema);
+		writeSchema(schemaPath, schema);
 	}
 
 	const pass = failureMessages.length === 0;
@@ -67,44 +67,44 @@ export async function toMatchSchema(object, schemaName) {
 	};
 }
 
-async function writeSchema(path, schema) {
+function writeSchema(path, schema) {
 	const s =
 		typeof schema === 'string' ? schema : JSON.stringify(schema, null, 2);
 
-	await fs.writeFile(path, s);
+	fs.writeFileSync(path, s);
 }
 
-async function readSchema(path) {
-	const fileExists = await checkIfFileExists(path);
+function readSchema(path) {
+	const fileExists = checkIfFileExists(path);
 
 	if (!fileExists) {
 		return null;
 	}
 
-	const schema = await fs.readFile(path, 'utf-8');
+	const schema = fs.readFileSync(path, 'utf-8');
 
 	const s = typeof schema === 'string' ? JSON.parse(schema) : schema;
 
 	return s;
 }
 
-async function checkIfFileExists(path) {
+function checkIfFileExists(path) {
 	try {
-		await fs.access(path);
+		fs.existsSync(path);
 		return true;
 	} catch {
 		return false;
 	}
 }
 
-async function findSchema(testPath, schemaName) {
-	const testDir = testPath.match(/.*\/(?=.+js)/)[0];
+function findSchema(testPath, schemaName) {
+	const testDir = testPath.match(/.*\/(?=.+ts)/)[0];
 	const schemaDir = path.resolve(testDir, 'schemas');
 
-	const dirExists = await checkIfFileExists(schemaDir);
+	const dirExists = checkIfFileExists(schemaDir);
 
 	if (!dirExists) {
-		await fs.mkdir(schemaDir, {recursive: true});
+		fs.mkdirSync(schemaDir, {recursive: true});
 	}
 
 	const schemaFileName = schemaName + '.json';
@@ -114,14 +114,14 @@ async function findSchema(testPath, schemaName) {
 	return schemaPath;
 }
 
-async function checkForSchemaChanges(schemaName, schemaPath, schema, object) {
-	const newSchema = await generateSchema(schemaName, object, schema);
+function checkForSchemaChanges(schemaName, schemaPath, schema, object) {
+	const newSchema = generateSchema(schemaName, object, schema);
 
 	const schemaDiff = compareSchemas(schema, newSchema);
 
 	if (schemaDiff.changed) {
 		if (SHOULD_UPDATE_SCHEMAS) {
-			await writeSchema(schemaPath, newSchema);
+			writeSchema(schemaPath, newSchema);
 		}
 
 		if (!SHOULD_UPDATE_SCHEMAS) {
