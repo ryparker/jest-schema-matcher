@@ -19,7 +19,7 @@
   "dependencies": {
     "ajv": "^6.12.2",
     "chalk": "^4.1.0",
-    "jest-matcher-utils": "^26.0.1",
+    "jest-matcher-utils": "^26.1.0",
     "pretty-format": "^26.0.1",
     "schematized": "^1.5.1",
     "variable-diff": "^2.0.1"
