@@ -1,12 +1,12 @@
-// Import Ajv from 'ajv';
-// Import prettyFormat from 'pretty-format';
+import Ajv, {ValidateFunction} from 'ajv';
+import {matcherHint, printExpected, printReceived} from 'jest-matcher-utils';
 
 import {SchemaBuilder} from 'schematized';
 import chalk from 'chalk';
 import diff from 'variable-diff';
 import fs from 'fs';
-import {matcherHint} from 'jest-matcher-utils';
 import path from 'path';
+import prettyFormat from 'pretty-format';
 
 interface CustomNodeJsGlobal extends NodeJS.Global {
 	TEST_DATA: {SHOULD_UPDATE_SCHEMAS: boolean};
@@ -16,26 +16,33 @@ declare const global: CustomNodeJsGlobal;
 
 const {SHOULD_UPDATE_SCHEMAS} = global.TEST_DATA;
 
-export function toMatchSchema(object, schemaName) {
-	const failureMessages = [];
+export default function toMatchSchema(object: any, schemaName: string) {
+	const failureMessages: string[] = [];
 
 	const schemaPath = findSchema(this.testPath, schemaName);
 
 	let schema = readSchema(schemaPath);
 
 	if (schema) {
-		const schemaChanges = checkForSchemaChanges(
+		const schemaDiffCheck = checkForSchemaChanges(
 			schemaName,
 			schemaPath,
 			schema,
 			object
 		);
-		if (schemaChanges) {
-			failureMessages.unshift(schemaChanges);
+		if (schemaDiffCheck.updated) {
+			schema = readSchema(schemaPath);
 		}
 
-		// Const validationFailures = validateAgainstSchema(schema, object)
-		// if (validationFailures) failureMessages.unshift(validationFailures)
+		if (schemaDiffCheck.failures) {
+			failureMessages.unshift(...schemaDiffCheck.failures);
+		}
+
+		const validationFailures = validateAgainstSchema(schema, object);
+
+		if (validationFailures) {
+			failureMessages.unshift(...validationFailures);
+		}
 	}
 
 	if (!schema) {
@@ -59,22 +66,20 @@ export function toMatchSchema(object, schemaName) {
 	failureMessages.unshift(title);
 
 	return {
-		message: () => {
-			return failureMessages.join('\n\n');
-		},
+		message: () => failureMessages.join('\n'),
 		pass,
 		schema
 	};
 }
 
-function writeSchema(path, schema) {
+function writeSchema(path: string, schema: Record<string, any>) {
 	const s =
 		typeof schema === 'string' ? schema : JSON.stringify(schema, null, 2);
 
 	fs.writeFileSync(path, s);
 }
 
-function readSchema(path) {
+function readSchema(path: string) {
 	const fileExists = checkIfFileExists(path);
 
 	if (!fileExists) {
@@ -89,16 +94,11 @@ function readSchema(path) {
 }
 
 function checkIfFileExists(path) {
-	try {
-		fs.existsSync(path);
-		return true;
-	} catch {
-		return false;
-	}
+	return fs.existsSync(path);
 }
 
-function findSchema(testPath, schemaName) {
-	const testDir = testPath.match(/.*\/(?=.+ts)/)[0];
+function findSchema(testPath: string, schemaName: string) {
+	const testDir = /.*\/(?=.+ts)/.exec(testPath)[0];
 	const schemaDir = path.resolve(testDir, 'schemas');
 
 	const dirExists = checkIfFileExists(schemaDir);
@@ -114,7 +114,12 @@ function findSchema(testPath, schemaName) {
 	return schemaPath;
 }
 
-function checkForSchemaChanges(schemaName, schemaPath, schema, object) {
+function checkForSchemaChanges(
+	schemaName: string,
+	schemaPath: string,
+	schema: Record<string, any>,
+	object: unknown
+) {
 	const newSchema = generateSchema(schemaName, object, schema);
 
 	const schemaDiff = compareSchemas(schema, newSchema);
@@ -122,23 +127,39 @@ function checkForSchemaChanges(schemaName, schemaPath, schema, object) {
 	if (schemaDiff.changed) {
 		if (SHOULD_UPDATE_SCHEMAS) {
 			writeSchema(schemaPath, newSchema);
+			return {
+				changes: true,
+				updated: true,
+				failures: []
+			};
 		}
 
 		if (!SHOULD_UPDATE_SCHEMAS) {
-			return [
-				chalk.bold.red('JSON Schema Trainer: ') +
-					chalk.yellow('Schema change is recommended:') +
-					'\n\n' +
-					schemaDiff.text +
-					'\n\n'
-			];
+			return {
+				changes: true,
+				updated: false,
+				failures: [
+					chalk.bold.red('JSON Schema Trainer: ') +
+						chalk.yellow('Schema change is recommended:') +
+						'\n\n' +
+						schemaDiff.text +
+						'\n\n'
+				]
+			};
 		}
 	}
 
-	return undefined;
+	return {
+		changes: false,
+		updated: false,
+		failures: []
+	};
 }
 
-function compareSchemas(schemaA, schemaB) {
+function compareSchemas(
+	schemaA: Record<string, any>,
+	schemaB: Record<string, any>
+) {
 	const clonedSchemaA = {...schemaA};
 	const clonedSchemaB = {...schemaB};
 	delete clonedSchemaA.examples;
@@ -147,7 +168,11 @@ function compareSchemas(schemaA, schemaB) {
 	return diff(clonedSchemaA, clonedSchemaB);
 }
 
-function generateSchema(_schemaName, object, schema = {}) {
+function generateSchema(
+	_schemaName: string,
+	object: unknown,
+	schema: Record<string, any> = {}
+) {
 	const schemaBuilder = new SchemaBuilder();
 
 	if (schema) {
@@ -161,44 +186,45 @@ function generateSchema(_schemaName, object, schema = {}) {
 	return newSchema;
 }
 
-// Function createSchemaValidator(schema) {
-// 	const ajv = new Ajv({schemaId: 'auto', allErrors: true});
+function createSchemaValidator(schema: Record<string, any>) {
+	const ajv = new Ajv({schemaId: 'auto', allErrors: true});
 
-// 	return ajv.compile(schema);
-// }
+	return ajv.compile(schema);
+}
 
-// Function validateAgainstSchema(schema, object) {
-// 	const validator = createSchemaValidator(schema);
-// 	const valid = validator(object);
+function validateAgainstSchema(schema: Record<string, any>, object: unknown) {
+	const validator = createSchemaValidator(schema);
+	const valid = validator(object);
 
-// 	if (!valid) {
-// 		return shapeValidationMessage(validator, object);
-// 	}
-// }
+	if (!valid) {
+		return shapeValidationMessage(validator, object);
+	}
 
-// function shapeValidationMessage(validator, _object) {
-// 	const {errors} = validator;
+	return null;
+}
 
-// 	return errors.map(error => {
-// 		const rejectedValue = prettyFormat(eval(`_object${error.objectPath}`));
-// 		const allowedValues = error?.params.allowedValues;
+function shapeValidationMessage(validator: ValidateFunction, _object: unknown) {
+	const {errors} = validator;
 
-// 		return (
-// 			chalk.bold.yellow(`${error.keyword.toUpperCase()}`) +
-// 			' violation:  ' +
-// 			chalk.yellow(`received${error.objectPath} ${error.message}.`) +
-// 			'\n\n' +
-// 			'Rejected value: ' +
-// 			printReceived(rejectedValue) +
-// 			'\n\n' +
-// 			(
-// 				allowedValues ?
-// 					chalk.dim('Allowed values: ') +
-// 				chalk.dim.green(prettyFormat(allowedValues)) +
-// 				'\n\n' :
-// 					''
-// 			) +
-// 			chalk.dim('Schema rule: ' + printExpected(error.schemaPath))
-// 		);
-// 	});
-// }
+	return errors.map(error => {
+		const rejectedValue = prettyFormat(eval(`_object${error.dataPath}`));
+		const violationDetails = error.params;
+
+		return (
+			chalk.bold.yellow(error.keyword.toUpperCase()) +
+			' violation:  ' +
+			chalk.yellow(`received ${error.dataPath} ${error.message}.`) +
+			'\n\n' +
+			'Rejected value: ' +
+			printReceived(rejectedValue) +
+			'\n\n' +
+			(violationDetails ?
+				'Violations details: ' +
+				chalk.red(prettyFormat(violationDetails)) +
+				'\n\n' :
+				'') +
+			chalk.dim('Schema rule: ' + printExpected(error.schemaPath)) +
+			'\n\n'
+		);
+	});
+}
