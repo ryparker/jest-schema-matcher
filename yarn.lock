@@ -8021,10 +8021,10 @@ saxes@^5.0.0:
   dependencies:
     xmlchars "^2.2.0"
 
-schematized@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/schematized/-/schematized-1.5.1.tgz#9452abc8d66776a3a1876c04d98874171888f511"
-  integrity sha512-b93Oze9SFvY65zhlI3MRz2OPouGDKpHEbKjX6LZ4yDjPX2aL3hFmxu3Oo7Lx0HvVBNUbRt68UqV9XP5/ol1ozw==
+schematized@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/schematized/-/schematized-1.6.0.tgz#0bec2722730171609ce9ec7e07519ecf4e06713c"
+  integrity sha512-jrBr+u5k0CjAJi5IsM7M9QhLNdT3Oc8TWbCbyqNfH5RvCgXu7QkzH6ucZhnzM1IKfG0bWIsjeAdo809PiU3i3g==
   dependencies:
     lodash "^4.17.15"
 
