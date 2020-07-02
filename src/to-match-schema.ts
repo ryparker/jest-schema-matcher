@@ -1,7 +1,7 @@
 import Ajv, {ValidateFunction} from 'ajv';
 import {matcherHint, printExpected, printReceived} from 'jest-matcher-utils';
 
-import {SchemaBuilder} from 'schematized';
+import SchemaBuilder from 'schematized';
 import chalk from 'chalk';
 import diff from 'variable-diff';
 import fs from 'fs';
@@ -208,7 +208,7 @@ function shapeValidationMessage(validator: ValidateFunction, _object: unknown) {
 
 	return errors.map(error => {
 		const rejectedValue = prettyFormat(eval(`_object${error.dataPath}`));
-		const violationDetails = error.params;
+		const expectedDetails = error.params;
 
 		return (
 			chalk.bold.yellow(error.keyword.toUpperCase()) +
@@ -218,9 +218,9 @@ function shapeValidationMessage(validator: ValidateFunction, _object: unknown) {
 			'Rejected value: ' +
 			printReceived(rejectedValue) +
 			'\n\n' +
-			(violationDetails ?
-				'Violations details: ' +
-				chalk.red(prettyFormat(violationDetails)) +
+			(expectedDetails ?
+				'Expected: ' +
+				chalk.red(prettyFormat(expectedDetails)) +
 				'\n\n' :
 				'') +
 			chalk.dim('Schema rule: ' + printExpected(error.schemaPath)) +
