@@ -9,12 +9,12 @@ import path from 'path';
 import prettyFormat from 'pretty-format';
 
 interface CustomNodeJsGlobal extends NodeJS.Global {
-	TEST_DATA: {SHOULD_UPDATE_SCHEMAS: boolean};
+	SHOULD_UPDATE_SCHEMAS: boolean;
 }
 
 declare const global: CustomNodeJsGlobal;
 
-const {SHOULD_UPDATE_SCHEMAS} = global.TEST_DATA;
+const {SHOULD_UPDATE_SCHEMAS} = global;
 
 export default function toMatchSchema(object: any, schemaName: string) {
 	const failureMessages: string[] = [];
