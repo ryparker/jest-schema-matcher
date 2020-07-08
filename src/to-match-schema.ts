@@ -53,7 +53,7 @@ export default function toMatchSchema(object: any, schemaName: string) {
 	const pass = failureMessages.length === 0;
 
 	const matcherOptions = {
-		comment: 'Using AJV schema validator.',
+		// Comment: 'Using AJV schema validator.',
 		isNot: this.isNot,
 		promise: this.promise
 	};
@@ -66,6 +66,7 @@ export default function toMatchSchema(object: any, schemaName: string) {
 	failureMessages.unshift(title);
 
 	return {
+		name: 'toMatchSchema',
 		message: () => failureMessages.join('\n'),
 		pass,
 		schema
