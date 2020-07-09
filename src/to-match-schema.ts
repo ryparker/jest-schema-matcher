@@ -16,6 +16,12 @@ declare const global: CustomNodeJsGlobal;
 
 const {SHOULD_UPDATE_SCHEMAS} = global;
 
+/**
+ * This ensures that a value matches the most recent JSON schema.
+ * Check out the [README](https://github.com/ryparker/jest-schema-matcher) for more information.
+ * @param object - Valid object or array
+ * @param schemaName - Name of the schema file to generate/validate.
+ */
 export default function toMatchSchema(object: any, schemaName: string) {
 	const failureMessages: string[] = [];
 
