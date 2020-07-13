@@ -233,5 +233,5 @@ function shapeValidationMessage(validator: ValidateFunction, _object: unknown) {
 			chalk.dim('Schema rule: ' + printExpected(error.schemaPath)) +
 			'\n\n'
 		);
-	}).slice(0, 2);
+	}).slice(0, 1);
 }
