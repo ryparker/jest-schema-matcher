@@ -213,7 +213,7 @@ function validateAgainstSchema(schema: Record<string, any>, object: unknown) {
 function shapeValidationMessage(validator: ValidateFunction, _object: unknown) {
 	const {errors} = validator;
 
-	return errors.map(error => {
+	return errors.slice(0, 1).map(error => {
 		const rejectedValue = prettyFormat(eval(`_object${error.dataPath}`));
 		const expectedDetails = error.params;
 
@@ -233,5 +233,5 @@ function shapeValidationMessage(validator: ValidateFunction, _object: unknown) {
 			chalk.dim('Schema rule: ' + printExpected(error.schemaPath)) +
 			'\n\n'
 		);
-	}).slice(0, 1);
+	});
 }
