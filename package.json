@@ -43,7 +43,7 @@
     "variable-diff": "^2.0.1"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.4",
+    "@types/jest": "^26.0.5",
     "@types/node": "^14.0.23",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "^3.2.0",
