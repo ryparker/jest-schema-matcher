@@ -10,7 +10,7 @@
     "declaration": true,
     "sourceMap": true,
     "pretty": true,
-    // "strict": true,
+    "strict": true,
     "noEmitOnError": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -18,10 +18,11 @@
     "noImplicitReturns": true,
     "types": ["node", "jest"],
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noImplicitThis": false
   },
   "compileOnSave": true,
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "types/variable-diff/index.d.ts"],
   "exclude": ["**/__tests__/**"],
   "typedocOptions": {
     "inputFiles": ["./src"],

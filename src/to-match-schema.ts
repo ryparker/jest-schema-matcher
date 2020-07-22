@@ -131,7 +131,7 @@ function checkForSchemaChanges(
 	schemaName: string,
 	schemaPath: string,
 	schema: Record<string, any>,
-	object: unknown
+	object: Record<string, unknown> | []
 ) {
 	const newSchema = generateSchema(schemaName, object, schema);
 
