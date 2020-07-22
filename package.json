@@ -26,6 +26,27 @@
       "no-eval": 0
     }
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test"
+    }
+  },
+  "lint-staged": {
+    "./src/**/*": [
+      "xo src --fix"
+    ]
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
@@ -38,17 +59,24 @@
     "ajv": "^6.12.3",
     "chalk": "^4.1.0",
     "jest-matcher-utils": "^26.1.0",
+    "lodash": "^4.17.19",
     "pretty-format": "^26.1.0",
     "schematized": "^1.7.1",
     "variable-diff": "^2.0.1"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "@types/jest": "^26.0.5",
+    "@types/lodash": "^4.14.157",
     "@types/node": "^14.0.24",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "^3.2.0",
+    "eslint-config-xo-typescript": "^0.31.0",
     "eslint-plugin-jest": "^23.18.0",
+    "husky": "^4.2.5",
     "jest": "^26.1.0",
+    "lint-staged": "^10.2.11",
     "nyc": "^15.1.0",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",

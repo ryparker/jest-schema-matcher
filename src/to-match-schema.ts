@@ -7,6 +7,7 @@ import diff from 'variable-diff';
 import fs from 'fs';
 import path from 'path';
 import prettyFormat from 'pretty-format';
+import _ from 'lodash';
 
 interface CustomNodeJsGlobal extends NodeJS.Global {
 	SHOULD_UPDATE_SCHEMAS: boolean;
@@ -23,6 +24,10 @@ const {SHOULD_UPDATE_SCHEMAS} = global;
  * @param schemaName - Name of the schema file to generate/validate.
  */
 export default function toMatchSchema(object: any, schemaName: string) {
+	if (!_.isObjectLike(object)) {
+		throw new TypeError(`Expected a valid object but received ${typeof object}: ${object}`);
+	}
+
 	const failureMessages: string[] = [];
 
 	const schemaPath = findSchema(this.testPath, schemaName);
@@ -100,12 +105,13 @@ function readSchema(path: string) {
 	return s;
 }
 
-function checkIfFileExists(path) {
+function checkIfFileExists(path: string) {
 	return fs.existsSync(path);
 }
 
 function findSchema(testPath: string, schemaName: string) {
-	const testDir = /.*\/(?=.+ts)/.exec(testPath)[0];
+	const testDir = testPath.replace(/[a-zA-z\d-_]+ts/, '');
+
 	const schemaDir = path.resolve(testDir, 'schemas');
 
 	const dirExists = checkIfFileExists(schemaDir);
@@ -177,7 +183,7 @@ function compareSchemas(
 
 function generateSchema(
 	_schemaName: string,
-	object: unknown,
+	object: Record<string, any>,
 	schema: Record<string, any> = {}
 ) {
 	const schemaBuilder = new SchemaBuilder();
@@ -212,6 +218,10 @@ function validateAgainstSchema(schema: Record<string, any>, object: unknown) {
 
 function shapeValidationMessage(validator: ValidateFunction, _object: unknown) {
 	const {errors} = validator;
+
+	if (!errors) {
+		throw new Error('Unexpected error: AJV did not provide validation violation details.');
+	}
 
 	return errors.slice(0, 1).map(error => {
 		const rejectedValue = prettyFormat(eval(`_object${error.dataPath}`));
