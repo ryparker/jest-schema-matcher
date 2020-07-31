@@ -58,7 +58,7 @@
   "dependencies": {
     "ajv": "^6.12.3",
     "chalk": "^4.1.0",
-    "jest-matcher-utils": "^26.1.0",
+    "jest-matcher-utils": "^26.2.0",
     "lodash": "^4.17.19",
     "pretty-format": "^26.1.0",
     "schematized": "^1.7.1",
