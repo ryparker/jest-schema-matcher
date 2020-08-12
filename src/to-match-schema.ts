@@ -101,9 +101,7 @@ function readSchema(path: string) {
 
 	const schema = fs.readFileSync(path, 'utf-8');
 
-	const s = typeof schema === 'string' ? JSON.parse(schema) : schema;
-
-	return s;
+	return typeof schema === 'string' ? JSON.parse(schema) : schema;
 }
 
 function checkIfFileExists(path: string) {
@@ -111,7 +109,7 @@ function checkIfFileExists(path: string) {
 }
 
 function findSchema(testPath: string, schemaName: string) {
-	const testDir = testPath.replace(/[a-zA-z\d-_]+ts/, '');
+	const testDir = testPath.replace(/(?<=\/)[\w-.]*\.test\.ts/gm, '');
 
 	const schemaDir = path.resolve(testDir, 'schemas');
 
@@ -184,7 +182,7 @@ function compareSchemas(
 function generateSchema(
 	_schemaName: string,
 	object: Record<string, any>,
-	schema: Record<string, any> = {}
+	schema?: Record<string, any>
 ) {
 	const schemaBuilder = new SchemaBuilder();
 
