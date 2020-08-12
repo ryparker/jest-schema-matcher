@@ -8131,10 +8131,10 @@ saxes@^5.0.0:
   dependencies:
     xmlchars "^2.2.0"
 
-schematized@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/schematized/-/schematized-1.8.0.tgz#440585efb6d44b68e0709f0b9b8ca666cf83afaf"
-  integrity sha512-c3oorwNLqEmV1kZ0qXKzyvQrOVcEcjn/H8iusAVEv2d4CcsmNQWHS744ZlycdjeJBbkN+vmditMUY0aNJG4nGw==
+schematized@^1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/schematized/-/schematized-1.8.2.tgz#6d22f0c1a07ce385e89033df48a48509e500bf13"
+  integrity sha512-EpZAYob5iThyVAWq8qCgJtW4YieGVHpyg20jXhQ1WkYAYsZJz0JvHATNZ28nZWUr9x5/LYmhpMwJlkOz7J/fzg==
   dependencies:
     lodash "^4.17.19"
 

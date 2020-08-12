@@ -41,6 +41,7 @@ export default function toMatchSchema(object: any, schemaName: string) {
 			schema,
 			object
 		);
+
 		if (schemaDiffCheck.updated) {
 			schema = readSchema(schemaPath);
 		}
@@ -134,7 +135,6 @@ function checkForSchemaChanges(
 	object: Record<string, unknown> | []
 ) {
 	const newSchema = generateSchema(schemaName, object, schema);
-
 	const schemaDiff = compareSchemas(schema, newSchema);
 
 	if (schemaDiff.changed) {
@@ -200,9 +200,7 @@ function generateSchema(
 }
 
 function createSchemaValidator(schema: Record<string, any>) {
-	const ajv = new Ajv({schemaId: 'auto', allErrors: true});
-
-	return ajv.compile(schema);
+	return new Ajv({schemaId: 'auto', allErrors: true}).compile(schema);
 }
 
 function validateAgainstSchema(schema: Record<string, any>, object: unknown) {
