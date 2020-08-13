@@ -1,3 +1,10 @@
+## [1.7.5](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.4...v1.7.5) (2020-08-13)
+
+
+### Bug Fixes
+
+* **min/max limits and empty object properties:** bumped schematized to resolve bugs ([ad52031](https://github.com/ryparker/jest-schema-matcher/commit/ad520312d00b9fcac886a3e4e56d0e1cd30e3b35))
+
 ## [1.7.4](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.3...v1.7.4) (2020-08-12)
 
 
