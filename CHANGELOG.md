@@ -1,3 +1,10 @@
+## [1.7.4](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.3...v1.7.4) (2020-08-12)
+
+
+### Bug Fixes
+
+* **schema locator:** improvement to test file name regex ([115376e](https://github.com/ryparker/jest-schema-matcher/commit/115376eccca5c79210177883bbccbaf8d30eda98))
+
 ## [1.7.3](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.2...v1.7.3) (2020-08-12)
 
 
