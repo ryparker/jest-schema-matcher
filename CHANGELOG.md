@@ -1,3 +1,10 @@
+## [1.7.7](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.6...v1.7.7) (2020-08-27)
+
+
+### Bug Fixes
+
+* **fixing regex replacement:** .replace() does not mutate, so we need to assign the value ([f95e533](https://github.com/ryparker/jest-schema-matcher/commit/f95e533adef9581f29c04dde7158be95801bd494))
+
 ## [1.7.6](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.5...v1.7.6) (2020-08-27)
 
 
