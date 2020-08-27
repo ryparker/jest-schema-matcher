@@ -109,7 +109,7 @@ function checkIfFileExists(path: string) {
 }
 
 function findSchema(testPath: string, schemaName: string) {
-	testPath.replace('\\', '/');
+	testPath = testPath.replace('\\', '/');
 
 	const testDir = testPath.replace(/(?<=\/)[\w-.]*\.test\.ts/gm, '');
 
