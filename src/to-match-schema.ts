@@ -1,5 +1,5 @@
 import Ajv, {ValidateFunction} from 'ajv';
-import {matcherHint, printExpected, printReceived} from 'jest-matcher-utils';
+import {matcherHint, printExpected} from 'jest-matcher-utils';
 
 import SchemaBuilder from 'schematized';
 import _ from 'lodash';
@@ -227,7 +227,7 @@ function shapeValidationMessage(validator: ValidateFunction, _object: unknown) {
 			chalk.yellow(`received ${error.dataPath} ${error.message}.`) +
 			'\n\n' +
 			'Rejected value: ' +
-			printReceived(rejectedValue) +
+			chalk.red(rejectedValue) +
 			'\n\n' +
 			(expectedDetails ?
 				'Expected: ' +
