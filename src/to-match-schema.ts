@@ -2,12 +2,12 @@ import Ajv, {ValidateFunction} from 'ajv';
 import {matcherHint, printExpected, printReceived} from 'jest-matcher-utils';
 
 import SchemaBuilder from 'schematized';
+import _ from 'lodash';
 import chalk from 'chalk';
 import diff from 'variable-diff';
 import fs from 'fs';
 import path from 'path';
 import prettyFormat from 'pretty-format';
-import _ from 'lodash';
 
 interface CustomNodeJsGlobal extends NodeJS.Global {
 	SHOULD_UPDATE_SCHEMAS: boolean;
@@ -109,6 +109,8 @@ function checkIfFileExists(path: string) {
 }
 
 function findSchema(testPath: string, schemaName: string) {
+	testPath.replace('\\', '/');
+
 	const testDir = testPath.replace(/(?<=\/)[\w-.]*\.test\.ts/gm, '');
 
 	const schemaDir = path.resolve(testDir, 'schemas');
