@@ -109,12 +109,9 @@ function checkIfFileExists(path: string) {
 }
 
 function findSchema(testPath: string, schemaName: string) {
-	testPath = testPath.replace('\\', '/');
-
-	const testDir = testPath.replace(/(?<=\/)[\w-.]*\.test\.ts/gm, '');
+	const testDir = testPath.replace(/(?<=(\/|\\))[\w\-.]*\.test\.ts/gm, '');
 
 	const schemaDir = path.resolve(testDir, 'schemas');
-
 	const dirExists = checkIfFileExists(schemaDir);
 
 	if (!dirExists) {
@@ -122,7 +119,6 @@ function findSchema(testPath: string, schemaName: string) {
 	}
 
 	const schemaFileName = schemaName + '.json';
-
 	const schemaPath = path.resolve(schemaDir, schemaFileName);
 
 	return schemaPath;
