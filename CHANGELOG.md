@@ -1,3 +1,10 @@
+## [1.7.6](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.5...v1.7.6) (2020-08-27)
+
+
+### Bug Fixes
+
+* **fix file path replacements for windows:** replaced \ with / for windows users ([7235550](https://github.com/ryparker/jest-schema-matcher/commit/72355501f238769d071c37fa536ceabb2ad897f6))
+
 ## [1.7.5](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.4...v1.7.5) (2020-08-13)
 
 
