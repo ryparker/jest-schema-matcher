@@ -1,3 +1,10 @@
+## [1.7.8](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.7...v1.7.8) (2020-08-27)
+
+
+### Bug Fixes
+
+* **windows file paths:** improved file path regex so that the mathcer supports windows and unix ([3b02a00](https://github.com/ryparker/jest-schema-matcher/commit/3b02a005271ff33739d974e73312e9c650b48de7))
+
 ## [1.7.7](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.6...v1.7.7) (2020-08-27)
 
 
