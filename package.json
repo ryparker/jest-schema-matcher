@@ -62,7 +62,7 @@
     "lodash": "^4.17.20",
     "pretty-format": "^26.4.2",
     "schematized": "^1.8.5",
-    "variable-diff": "^2.0.1"
+    "variable-diff": "^2.0.2"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
