@@ -5084,7 +5084,7 @@ jest-config@^26.6.0:
     micromatch "^4.0.2"
     pretty-format "^26.6.0"
 
-jest-diff@^26.0.0, jest-diff@^26.5.2, jest-diff@^26.6.0:
+jest-diff@^26.0.0, jest-diff@^26.6.0:
   version "26.6.0"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-26.6.0.tgz#5e5bbbaf93ec5017fae2b3ef12fc895e29988379"
   integrity sha512-IH09rKsdWY8YEY7ii2BHlSq59oXyF2pK3GoK+hOK9eD/x6009eNB5Jv1shLMKgxekodPzLlV7eZP1jPFQYds8w==
@@ -5194,16 +5194,6 @@ jest-leak-detector@^26.6.0:
   dependencies:
     jest-get-type "^26.3.0"
     pretty-format "^26.6.0"
-
-jest-matcher-utils@^26.5.2:
-  version "26.5.2"
-  resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-26.5.2.tgz#6aa2c76ce8b9c33e66f8856ff3a52bab59e6c85a"
-  integrity sha512-W9GO9KBIC4gIArsNqDUKsLnhivaqf8MSs6ujO/JDcPIQrmY+aasewweXVET8KdrJ6ADQaUne5UzysvF/RR7JYA==
-  dependencies:
-    chalk "^4.0.0"
-    jest-diff "^26.5.2"
-    jest-get-type "^26.3.0"
-    pretty-format "^26.5.2"
 
 jest-matcher-utils@^26.6.0:
   version "26.6.0"
@@ -7518,7 +7508,7 @@ prettier@^2.1.2:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.1.2.tgz#3050700dae2e4c8b67c4c3f666cdb8af405e1ce5"
   integrity sha512-16c7K+x4qVlJg9rEbXl7HEGmQyZlG4R9AgP+oHKRMsMsuk8s+ATStlf1NpDqyBI1HpVyfjLOeMhH2LvuNvV5Vg==
 
-pretty-format@^26.0.0, pretty-format@^26.5.2, pretty-format@^26.6.0:
+pretty-format@^26.0.0, pretty-format@^26.6.0:
   version "26.6.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-26.6.0.tgz#1e1030e3c70e3ac1c568a5fd15627671ea159391"
   integrity sha512-Uumr9URVB7bm6SbaByXtx+zGlS+0loDkFMHP0kHahMjmfCtmFY03iqd++5v3Ld6iB5TocVXlBN/T+DXMn9d4BA==
