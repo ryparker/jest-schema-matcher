@@ -93,7 +93,7 @@ function writeSchema(path: string, schema: Record<string, any>) {
 }
 
 function readSchema(path: string) {
-	const fileExists = checkIfFileExists(path);
+	const fileExists = fs.existsSync(path);
 
 	if (!fileExists) {
 		return null;
@@ -104,15 +104,10 @@ function readSchema(path: string) {
 	return typeof schema === 'string' ? JSON.parse(schema) : schema;
 }
 
-function checkIfFileExists(path: string) {
-	return fs.existsSync(path);
-}
-
 function findSchema(testPath: string, schemaName: string) {
-	const testDir = testPath.replace(/(?<=(\/|\\))[\w\-.]*\.test\.ts/gm, '');
-
-	const schemaDir = path.resolve(testDir, 'schemas');
-	const dirExists = checkIfFileExists(schemaDir);
+	const parsedTestPath = path.parse(testPath);
+	const schemaDir = path.resolve(parsedTestPath.dir, 'schemas');
+	const dirExists = fs.existsSync(schemaDir);
 
 	if (!dirExists) {
 		fs.mkdirSync(schemaDir, {recursive: true});
