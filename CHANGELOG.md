@@ -1,3 +1,10 @@
+## [1.7.9](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.8...v1.7.9) (2020-08-27)
+
+
+### Bug Fixes
+
+* **improved console logs:** rejected value will no longer be wrapped in 2 sets of quotes ([1f30068](https://github.com/ryparker/jest-schema-matcher/commit/1f300680cd6b13bc5059683732eaca82d5e2809b))
+
 ## [1.7.8](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.7...v1.7.8) (2020-08-27)
 
 
