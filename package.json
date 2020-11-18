@@ -1,6 +1,6 @@
 {
   "name": "jest-schema-matcher",
-  "version": "1.7.9",
+  "version": "1.7.10",
   "license": "MIT",
   "files": [
     "dist/"

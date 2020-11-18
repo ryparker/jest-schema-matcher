@@ -1,3 +1,10 @@
+## [1.7.10](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.9...v1.7.10) (2020-11-18)
+
+
+### Bug Fixes
+
+* **package.json, to-match-schema.ts:** upgraded deps, implemented node path parsing instead of regex ([2f1dc60](https://github.com/ryparker/jest-schema-matcher/commit/2f1dc60dac43b03539c2e73fd3dca05345a6aa27))
+
 ## [1.7.9](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.8...v1.7.9) (2020-08-27)
 
 
