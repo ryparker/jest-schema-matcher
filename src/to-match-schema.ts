@@ -123,7 +123,7 @@ function checkForSchemaChanges(
 	schemaName: string,
 	schemaPath: string,
 	schema: Record<string, any>,
-	object: Record<string, unknown> | []
+	object: Record<string, unknown> | Array<Record<string, unknown>>
 ) {
 	const newSchema = generateSchema(schemaName, object, schema);
 	const schemaDiff = compareSchemas(schema, newSchema);
