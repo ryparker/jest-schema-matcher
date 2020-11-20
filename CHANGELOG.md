@@ -1,3 +1,13 @@
+# Changelog
+
+## [1.7.11](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.10...v1.7.11) (2020-11-20)
+
+
+### Bug Fixes
+
+* **package.json:** upgraded deps and resolved yargs-parser ([3c5d93d](https://github.com/ryparker/jest-schema-matcher/commit/3c5d93d3f3a0a340fae716f72c79d742419ce408))
+* **to-match-schema.ts:** fixed XO linter errors ([6e4b299](https://github.com/ryparker/jest-schema-matcher/commit/6e4b29911b0564447c65a399c3f0eb575c77d053))
+
 ## [1.7.10](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.9...v1.7.10) (2020-11-18)
 
 
