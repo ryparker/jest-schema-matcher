@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.12](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.11...v1.7.12) (2020-11-20)
+
+
+### Bug Fixes
+
+* **package.json:** resolved to "mem": "^4.0", ([4b11690](https://github.com/ryparker/jest-schema-matcher/commit/4b11690e974de09020a92c6694de59d306abee06))
+
 ## [1.7.11](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.10...v1.7.11) (2020-11-20)
 
 
