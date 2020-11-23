@@ -76,7 +76,7 @@
     "jest-matcher-utils": "^26.6.2",
     "lodash": "^4.17.20",
     "pretty-format": "^26.6.2",
-    "schematized": "^1.8.7",
+    "schematized": "^1.8.8",
     "variable-diff": "^2.0.2"
   },
   "devDependencies": {
