@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.14](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.13...v1.7.14) (2020-12-23)
+
+
+### Bug Fixes
+
+* **package.json, yarn.lcok:** upgraded schematizesd and locked AJV to v6 ([fad3c03](https://github.com/ryparker/jest-schema-matcher/commit/fad3c0324d709c70723e06e4962968986a047d48))
+
 ## [1.7.13](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.12...v1.7.13) (2020-12-23)
 
 
