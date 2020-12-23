@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.13](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.12...v1.7.13) (2020-12-23)
+
+
+### Bug Fixes
+
+* **package.json, ajv:** updated deps and upgraded use of AJV to v7 ([abb2894](https://github.com/ryparker/jest-schema-matcher/commit/abb2894a1f655193dedfad8ae6188af00fbd7326))
+* **package.json, yarn.lock:** upgraded deps ([883ba89](https://github.com/ryparker/jest-schema-matcher/commit/883ba890f3302aaf98875696335e448a1bd8f8ae))
+
 ## [1.7.12](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.11...v1.7.12) (2020-11-20)
 
 
