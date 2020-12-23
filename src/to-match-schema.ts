@@ -191,7 +191,7 @@ function generateSchema(
 }
 
 function createSchemaValidator(schema: Record<string, any>) {
-	return new Ajv({schemaId: 'auto', allErrors: true}).compile(schema);
+	return new Ajv({allErrors: true}).compile(schema);
 }
 
 function validateAgainstSchema(schema: Record<string, any>, object: unknown) {
