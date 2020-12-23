@@ -71,12 +71,12 @@
     "yargs-parser": "^13.1.2"
   },
   "dependencies": {
-    "ajv": "^7.0.2",
+    "ajv": "6.12.4",
     "chalk": "^4.1.0",
     "jest-matcher-utils": "^26.6.2",
     "lodash": "^4.17.20",
     "pretty-format": "^26.6.2",
-    "schematized": "^1.8.8",
+    "schematized": "^1.8.9",
     "variable-diff": "^2.0.2"
   },
   "devDependencies": {
