@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.8.0](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.14...v1.8.0) (2021-01-01)
+
+
+### Features
+
+* **schema generation:** generated schemas are now sorted to reduce unnecessary order changes ([a1cb90b](https://github.com/ryparker/jest-schema-matcher/commit/a1cb90b9cbadcad64adf98dc4997faf67360ea5d))
+
 ## [1.7.14](https://github.com/ryparker/jest-schema-matcher/compare/v1.7.13...v1.7.14) (2020-12-23)
 
 
